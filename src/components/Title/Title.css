@@ -1,0 +1,16 @@
+.title {
+  background-color: red;
+  color: white;
+  padding: 20px 0;
+  width: 100vw;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.title h1{
+    margin: 0;
+}
