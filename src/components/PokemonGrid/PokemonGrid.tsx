@@ -4,6 +4,7 @@ import { PokemonDialogInfo, PokemonList } from "../../types/pokemonList";
 import { ToolTipName } from "../ToolTipName";
 import toCapitalize from "../../helper/toCapitalize";
 import getSinglePokemon from "../../services/getSinglePokemon";
+import { Pokeball } from "../Pokeball";
 
 export type PokemonGridProps = {allPokemon: PokemonList[] | null;};
 
@@ -11,10 +12,14 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ allPokemon }) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
   const [pokemonInfo, setPokemonInfo] = useState<PokemonDialogInfo>();
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const handlePokemonInfo = (name: string) => {
     getSinglePokemon(name).then((data) => {
       setPokemonInfo(data);
+      if(data){
+        setIsLoading(false)
+      }
     });
     if (modalRef.current) {
       modalRef.current.showModal();
@@ -24,6 +29,7 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ allPokemon }) => {
   const closeModal = ()=>{
     modalRef.current?.close();
     setPokemonInfo(undefined);
+    setIsLoading(true)
   }
 
   return (
@@ -49,7 +55,7 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ allPokemon }) => {
                     X
                 </button>
                 </div>
-                <img src={pokemonInfo?.img} alt="" />
+                {isLoading ? <Pokeball/> : <img src={pokemonInfo?.img} alt="" /> }
                 <div className="dialog-types">
                   {pokemonInfo?.types?.map((type, index) => (
                     <p key={`${type}-${index}`}>{type}</p>
