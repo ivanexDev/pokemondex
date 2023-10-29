@@ -3,7 +3,7 @@ import "./PokemonGrid.css";
 import { PokemonDialogInfo, PokemonList } from "../../types/pokemonList";
 import { ToolTipName } from "../ToolTipName";
 import toCapitalize from "../../helper/toCapitalize";
-import getSinglePokemon from "../../services/getSinglePokemon";
+import {getSinglePokemon} from "../../services/getPokemon";
 import { Pokeball } from "../Pokeball";
 
 export type PokemonGridProps = {allPokemon: PokemonList[] | null;};

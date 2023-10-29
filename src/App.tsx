@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Title } from "./components/Title";
-import getAllPokemon from "./services/getPokemon";
+import {getAllPokemon} from "./services/getPokemon";
 import { PokemonGrid } from "./components/PokemonGrid";
 import { PokemonList } from "./types/pokemonList";
+
+
 
 
 function App() {
@@ -11,7 +13,9 @@ function App() {
   const [allPokemon , setAllPokemon ] = useState<PokemonList[] | null>(null)
 
   useEffect(()=>{
-    getAllPokemon().then(res => setAllPokemon(res))
+    getAllPokemon().then(res => {
+      console.log(res)
+      setAllPokemon(res)})
   },[])
 
   return (<>
